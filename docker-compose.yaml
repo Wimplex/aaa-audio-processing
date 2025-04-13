@@ -1,0 +1,16 @@
+version: '2.3'
+services:
+    aaa-seminar:
+        build:
+          context: ./
+          dockerfile: ./Dockerfile
+        image: aaa-seminar:$USER
+        container_name: aaa-seminar-$USER
+        ports:
+            - "8320:8888"
+            - "8310:6006"
+            - "8300:8890"
+        volumes:
+            - ./:/app
+        command: /bin/bash -c "cd /; jupyter notebook --allow-root --ip=0.0.0.0 --no-browser;"
+        restart: unless-stopped
